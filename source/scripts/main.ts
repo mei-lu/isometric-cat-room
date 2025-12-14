@@ -212,7 +212,7 @@ const IsometricRoom = () => {
     );
 
     window.addEventListener('mousemove', (event) => {
-      debounce(() => animateInteractiveObjects(event));
+      animateInteractiveObjects(event);
     });
   };
 
