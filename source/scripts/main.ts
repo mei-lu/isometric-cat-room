@@ -202,17 +202,17 @@ const IsometricRoom = () => {
   };
 
   const setSceneEvents = () => {
-    // TODO: debounce
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
+    window.addEventListener(
+      'resize',
+      debounce(() => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }),
+    );
 
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-
-    // TODO: Debounce
     window.addEventListener('mousemove', (event) => {
-      animateInteractiveObjects(event);
+      debounce(() => animateInteractiveObjects(event));
     });
   };
 
@@ -220,6 +220,16 @@ const IsometricRoom = () => {
     requestAnimationFrame(animate);
     controls.update();
     renderer.render(scene, camera);
+  };
+
+  const debounce = <T extends Function>(cb: T, wait = 20): T => {
+    let timer = 0;
+    const callable = (...args: any[]) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => cb(...args), wait);
+    };
+
+    return callable as any as T;
   };
 
   // Load
