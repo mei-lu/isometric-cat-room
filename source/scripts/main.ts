@@ -60,7 +60,7 @@ const IsometricRoom = () => {
     };
 
     const roomGLTF = await gltfLoader.loadAsync('/models/isoroom-compressed.glb');
-    const structuralTexture = await textureLoader.loadAsync('textures/TextureSet1_structual.webp');
+    const structuralTexture = await textureLoader.loadAsync('textures/TextureSet1_structural.webp');
     const noninteractiveTexture = await textureLoader.loadAsync(
       'textures/TextureSet2_noninteractive.webp',
     );
